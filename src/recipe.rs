@@ -90,7 +90,9 @@ impl Recipe {
 impl fmt::Display for Recipe {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
         writeln!(formatter, "{}", self.method)?;
-        writeln!(formatter, "  coffee: {:.0} g", self.coffee_grams)?;
+        // Coffee scales read to 0.1 g, and rounding a small AeroPress dose to
+        // a whole gram shifts the ratio noticeably.
+        writeln!(formatter, "  coffee: {:.1} g", self.coffee_grams)?;
         writeln!(formatter, "  water:  {:.0} g", self.water_grams)?;
         write!(formatter, "  ratio:  1:{:.1}", self.ratio())
     }
@@ -104,6 +106,12 @@ mod tests {
     fn pour_over_scales_from_water() {
         let recipe = Recipe::for_water(Method::PourOver, 320.0);
         assert_eq!(recipe.coffee_grams, 20.0);
+    }
+
+    #[test]
+    fn display_keeps_tenths_of_a_gram() {
+        let recipe = Recipe::for_water(Method::AeroPress, 220.0);
+        assert!(recipe.to_string().contains("coffee: 15.7 g"));
     }
 
     #[test]
