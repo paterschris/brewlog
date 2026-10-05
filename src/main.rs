@@ -1,7 +1,9 @@
+mod method;
 mod recipe;
 mod units;
 
-use recipe::{Method, Recipe};
+use method::Method;
+use recipe::Recipe;
 use std::env;
 use std::process::ExitCode;
 
