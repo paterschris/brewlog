@@ -6,7 +6,7 @@ coffee you have and it works out the rest.
 ```sh
 $ brewlog v60 --water 320
 Pour-over
-  coffee: 20 g
+  coffee: 20.0 g
   water:  320 g
   ratio:  1:16.0
   steep:  3:30
