@@ -21,7 +21,13 @@ Pour-over
 | AeroPress    | `aeropress`             | 1:14  |
 | Cold brew    | `cold-brew`, `cold`     | 1:8   |
 
-## Building
+## Installing
+
+```sh
+cargo install --git https://github.com/paterschris/brewlog
+```
+
+## Building from source
 
 ```sh
 cargo build --release
