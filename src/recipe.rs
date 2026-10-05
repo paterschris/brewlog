@@ -7,6 +7,7 @@ pub enum Method {
     FrenchPress,
     AeroPress,
     ColdBrew,
+    Espresso,
 }
 
 impl Method {
@@ -17,6 +18,7 @@ impl Method {
             Method::FrenchPress => 15.0,
             Method::AeroPress => 14.0,
             Method::ColdBrew => 8.0,
+            Method::Espresso => 2.0,
         }
     }
 
@@ -26,6 +28,7 @@ impl Method {
             Method::FrenchPress => 240,
             Method::AeroPress => 90,
             Method::ColdBrew => 16 * 60 * 60,
+            Method::Espresso => 28,
         }
     }
 }
@@ -39,6 +42,7 @@ impl FromStr for Method {
             "french-press" | "press" => Ok(Method::FrenchPress),
             "aeropress" => Ok(Method::AeroPress),
             "cold-brew" | "cold" => Ok(Method::ColdBrew),
+            "espresso" => Ok(Method::Espresso),
             other => Err(format!("unknown brew method: {other}")),
         }
     }
@@ -51,6 +55,7 @@ impl fmt::Display for Method {
             Method::FrenchPress => "French press",
             Method::AeroPress => "AeroPress",
             Method::ColdBrew => "Cold brew",
+            Method::Espresso => "Espresso",
         };
         formatter.write_str(name)
     }
@@ -110,6 +115,7 @@ mod tests {
     fn method_parses_aliases() {
         assert_eq!("v60".parse::<Method>(), Ok(Method::PourOver));
         assert_eq!("cold".parse::<Method>(), Ok(Method::ColdBrew));
-        assert!("espresso".parse::<Method>().is_err());
+        assert_eq!("espresso".parse::<Method>(), Ok(Method::Espresso));
+        assert!("moka".parse::<Method>().is_err());
     }
 }
