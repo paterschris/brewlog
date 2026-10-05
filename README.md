@@ -12,6 +12,17 @@ Pour-over
   steep:  3:30
 ```
 
+Water can also be given in cups or fluid ounces:
+
+```sh
+$ brewlog press --ounces 12
+French press
+  coffee: 23 g
+  water:  340 g
+  ratio:  1:15.0
+  steep:  4:00
+```
+
 ## Supported methods
 
 | Method       | Aliases                 | Ratio |
