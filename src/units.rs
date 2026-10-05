@@ -1,4 +1,10 @@
+const GRAMS_PER_OUNCE: f64 = 28.3495;
 const MILLILITERS_PER_CUP: f64 = 236.588;
+
+/// US fluid ounces. An imperial fluid ounce is about 28.41 ml.
+pub fn ounces_to_grams(ounces: f64) -> f64 {
+    ounces * GRAMS_PER_OUNCE
+}
 
 /// Water is close enough to 1 g/ml at brewing temperatures that cups convert
 /// straight to grams.
@@ -30,5 +36,10 @@ mod tests {
     #[test]
     fn converts_cups() {
         assert!((cups_to_grams(2.0) - 473.176).abs() < 0.001);
+    }
+
+    #[test]
+    fn converts_ounces() {
+        assert!((ounces_to_grams(12.0) - 340.194).abs() < 0.001);
     }
 }

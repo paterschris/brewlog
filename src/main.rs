@@ -5,7 +5,8 @@ use recipe::{Method, Recipe};
 use std::env;
 use std::process::ExitCode;
 
-const USAGE: &str = "usage: brewlog <method> (--water <grams> | --coffee <grams> | --cups <count>)";
+const USAGE: &str =
+    "usage: brewlog <method> (--water <grams> | --coffee <grams> | --cups <count> | --ounces <count>)";
 
 fn main() -> ExitCode {
     match run(env::args().skip(1).collect()) {
@@ -33,6 +34,7 @@ fn run(arguments: Vec<String>) -> Result<String, String> {
         "--water" => Recipe::for_water(method, amount),
         "--coffee" => Recipe::for_coffee(method, amount),
         "--cups" => Recipe::for_water(method, units::cups_to_grams(amount)),
+        "--ounces" => Recipe::for_water(method, units::ounces_to_grams(amount)),
         other => return Err(format!("unknown flag: {other}")),
     };
 
